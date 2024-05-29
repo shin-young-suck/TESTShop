@@ -1,0 +1,50 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta carset="UTF-8">
+	</head>
+	<body>
+		<header th:insert="header_nav.html"></header>
+		<h1>상점</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>itemNum</th>
+					<th>name</th>
+					<th>title</th>
+					<th>count</th>
+					<th>price</th>
+					<th>main_img</th>
+					<th>detail_img</th>
+					<th>model_num</th>
+					<th>장바구니</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item:${itemList}">
+					<td th:text="${item.itemNum}"></td>
+					<td th:text="${item.name}"></td>
+					<td th:text="${item.title}"></td>					
+					<td th:text="${item.count}"></td>
+					<td th:text="${item.price}"></td>
+					<td th:text="${item.mainImg}"></td>
+					<td th:text="${item.detail_img}"></td>
+					<td th:text="${item.model_num}"></td>
+					<td>
+						<form action="/itemBasket/insert.do" method="post">
+							<input type="hidden" name="itemNum" th:value="${item.itemNum}">
+							<div class="input-group">
+							  <select class="form-select" name="count">
+							    <option selected value="1">1</option>
+							    <option value="2">2</option>
+							    <option value="3">3</option>
+							    <option value="4">4</option>
+							  </select>
+							  <button class="btn btn-outline-primary" type="submit">추가</button>
+							</div>
+						</form>
+					</td>
+				</tr>		
+			</tbody>
+		</table>
+	</body>
+</html>
